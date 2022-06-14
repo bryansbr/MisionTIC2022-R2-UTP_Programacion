@@ -2,7 +2,7 @@
 """
 Created on Tue May  24 00:31:00 2022
 
-@author: Bryan
+@author: Bryan Biojó
 """
 
 def AutoPartes(ventas):

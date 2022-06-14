@@ -2,7 +2,7 @@
 """
 Created on Wed May  11 23:53:23 2022
 
-@author: Bryan
+@author: Bryan Biojó
 """
 
 def cliente(informacion: dict) -> dict:
@@ -17,7 +17,8 @@ def cliente(informacion: dict) -> dict:
     elif edad > 18:
         atraccion = 'X-Treme'; total_boleta = 20000 * (1 - 0.05) if primer_ingreso else 20000
 
-    else: apto = False; atraccion = 'N/A'; total_boleta = 'N/A'
+    else:
+        apto = False; atraccion = 'N/A'; total_boleta = 'N/A'
 
     info = {"nombre": nombre, "edad": edad, "atraccion": atraccion, "apto": apto, "primer_ingreso": primer_ingreso, "total_boleta": total_boleta}
 

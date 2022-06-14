@@ -2,7 +2,7 @@
 """
 Created on Sat May  7 12:47:10 2022
 
-@author: Bryan
+@author: Bryan Biojó
 """
 
 def CDT(usuario: str, capital: int, tiempo: int):
