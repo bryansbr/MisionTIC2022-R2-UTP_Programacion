@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package reto4.App;
+package reto4.app;
 
 import reto4.view.ReportesView;
 import java.sql.SQLException;
