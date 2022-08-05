@@ -2,18 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package view;
+package reto4.view;
 
-import controller.ReportesController;
 import java.sql.*;
+import reto4.model.vo.*;
+import reto4.controller.ReportesController;
+import java.util.List;
 
 /**
  *
  * @author Bryan
  */
 public class ReportesView {
+    private static ReportesController controladorReportes;
     
-    ReportesController controladorReportes = new ReportesController();
+    public ReportesView() {
+        controladorReportes = new ReportesController();
+    }
     
     private String repitaCaracter(Character caracter, Integer veces) {
         String respuesta = "";
@@ -24,7 +29,7 @@ public class ReportesView {
         return respuesta;
     }
     
-    public void proyectosFinanciadosPorBanco(String banco) throws SQLException {
+    public void proyectosFinanciadosPorBanco(String banco) {
         System.out.println(repitaCaracter('=', 36) + " LISTADO DE PROYECTOS POR BANCO "
                 + repitaCaracter('=', 37));
         
@@ -33,34 +38,54 @@ public class ReportesView {
             System.out.println(repitaCaracter('-', 105));
             
             // Imprimir en pantalla la información del proyecto
-            String reporte = controladorReportes.generarProyectosBanco(banco);
-            System.out.println(reporte);
+            try {
+                List<ProyectoBancoVo> proyectos = controladorReportes.listarProyectosPorBanco(banco);
+
+                for(ProyectoBancoVo proyecto : proyectos) {
+                    System.out.println(proyecto.darFormato());
+                }
+            } catch(SQLException e) {
+                System.err.println("Error: " + e.getMessage());
+            }
         }
     }
     
-    public void totalAdeudadoPorProyectosSuperioresALimite(Double limiteInferior) throws SQLException {
+    public void totalAdeudadoPorProyectosSuperioresALimite(Double limiteInferior) {
         System.out.println(repitaCaracter('=', 1) + " TOTAL DEUDAS POR PROYECTO "
                 + repitaCaracter('=', 1));
         
         if (limiteInferior != null) {
-            System.out.println(String.format("%3s %15s", "ID", "VALOR "));
+            System.out.println(String.format("%3s %14s", "ID", "VALOR "));
             System.out.println(repitaCaracter('-', 29));
-            
+
             // Imprimir en pantalla la información del total adeudado
-            String reporte = controladorReportes.generarDeudasPorProyecto(limiteInferior);
-            System.out.println(reporte);
+            try {
+                List<DeudasPorProyectoVo> deudas = controladorReportes.listarDeudasPorProyecto(limiteInferior);
+
+                for(DeudasPorProyectoVo deuda : deudas) {
+                    System.out.println(deuda.darFormato());
+                }
+            } catch(SQLException e) {
+                System.err.println("Error: " + e.getMessage());
+            }
         }
     }
     
-    public void lideresQueMasGastan() throws SQLException {
+    public void lideresQueMasGastan() {
         System.out.println(repitaCaracter('=', 6) + " 10 LIDERES MAS COMPRADORES "
                 + repitaCaracter('=', 7));
-        System.out.println(String.format("%-25s %15s", "LIDER", "VALOR "));
+        System.out.println(String.format("%-25s %14s", "LIDER", "VALOR "));
         System.out.println(repitaCaracter('-', 41));
         
         // Imprimir en pantalla la información de los líderes
-            String reporte = controladorReportes.generarComprasLider();
-            System.out.println(reporte);
+        try {
+            List<ComprasDeLiderVo> compras = controladorReportes.listarComprasDeLider();
+            
+            for(ComprasDeLiderVo compra : compras) {
+                System.out.println(compra.darFormato());
+            }
+        } catch(SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
-    
 }
